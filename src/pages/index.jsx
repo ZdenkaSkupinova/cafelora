@@ -23,3 +23,19 @@ document.querySelector('#root').innerHTML = render(
   </div>
 );
 
+
+const navButton = document.querySelector('.nav-btn');
+const navMenu = document.querySelector('.rollout-nav');
+
+navButton.addEventListener('click', () => {
+  navMenu.classList.toggle('nav-closed');
+});
+
+const navLinks = document.querySelectorAll('.rollout-nav a');
+navLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    navMenu.classList.add('nav-closed');
+  });
+});
+
+

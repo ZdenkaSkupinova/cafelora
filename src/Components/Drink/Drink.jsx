@@ -1,39 +1,38 @@
 import "./drink.css"
 import { Layer } from "../Layer/Layer"
 
-export const Drink = ({id, name, image, layer, color, label, ordered}) => {
+export const Drink = ({id, name, image, layers, ordered}) => {
     return(
-<div className="drink">{id}
+<div className="drink">
 <div className="drink__product">
   <div className="drink__cup">
-    <img src={image} alt="salek kavy"/>
-
+  <img src={`http://localhost:4000${image}`} alt="šálek kávy"/>
   </div>
   <div className="drink__info">
     <h3>{name}</h3>
-
-    <Layer label = "espresso" />
-
+    {layers.map((item) => (
+      <Layer 
+          key={item.label}
+          color={item.color}
+          label={item.label}
+      />
+    ))}  
   </div>
 </div>
-<form className="drink__controls">
+<form className="drink__controls">{id}
   <input type="hidden" className="order-id" value="0" />
-  {{ordered} ?    
-  <button className="order-btn">Objednat</button> : false} 
+  {{ordered} ? (
+    <button className="order-btn">Objednat</button>
+   ) : (
+    <button className="delete-btn">Zrušit</button>
+    )   
+  } 
 </form>
 </div>
     )
 }
 
-// jiná cesta, bude API = <img src="/cups/espresso.png" />
-
 /*
-id={0}
-ordered={false}
-name={name}
-image={"http://localhost:4000/assets/{image}"}
-const {color, label} = layers
-
 <Drink
   id={0}
   name="Romano"
@@ -50,5 +49,5 @@ const {color, label} = layers
     },
   ]}
 />
-
  */
+

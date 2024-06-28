@@ -1,6 +1,12 @@
 import "./menu.css"
 import { Drink } from "../Drink/Drink"
 
+const response = await fetch("http://localhost:4000/api/drinks")
+const json = await response.json()
+export const drinks = json.data
+
+console.log(drinks)
+
 export const Menu = () => {
   return (
 <section id="menu" className="menu">
@@ -10,8 +16,15 @@ export const Menu = () => {
     Vyberte si z našeho interaktivního menu a nemusíte čekat na obsluhu
   </p>
   <div className="drinks-list">
- 
-    <Drink name = "Espresso" />
+  {drinks.map((item) => (
+    <Drink  
+        key={item.name}
+        name={item.name}
+        image={item.image}
+        layers={item.layers}
+    />
+  ))}
+
 
     <div className="drink">
       <div className="drink__product">
@@ -67,3 +80,7 @@ export const Menu = () => {
 </section>
   )
 }
+
+// dvě kávy jako vzor, pak smazat
+
+

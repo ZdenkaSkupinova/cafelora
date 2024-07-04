@@ -1,8 +1,7 @@
 import "./drink.css"
 import { Layer } from "../Layer/Layer"
 
-export const Drink = ({id, name, image, layers, ordered}) => {
-    return(
+export const Drink = ({id, name, image, layers, ordered}) => (
 <div className="drink">
 <div className="drink__product">
   <div className="drink__cup">
@@ -10,44 +9,25 @@ export const Drink = ({id, name, image, layers, ordered}) => {
   </div>
   <div className="drink__info">
     <h3>{name}</h3>
-    {layers.map((item) => (
+    {layers.map((layer) => (
       <Layer 
-          key={item.label}
-          color={item.color}
-          label={item.label}
+          key={layer.label}
+          color={layer.color}
+          label={layer.label}
       />
     ))}  
   </div>
 </div>
-<form className="drink__controls">{id}
-  <input type="hidden" className="order-id" value="0" />
-  {{ordered} ? (
-    <button className="order-btn">Objednat</button>
-   ) : (
-    <button className="delete-btn">Zrušit</button>
-    )   
-  } 
-</form>
+<form className="drink__controls" data-id={id}>
+      <input type="hidden" className="order-id" value={id} />
+      <button type="submit" className={ordered ? 'order-btn order-btn--ordered' : 'order-btn'}>
+        {ordered ? 'Zrušit' : 'Objednat'}
+      </button>
+    </form>
 </div>
-    )
-}
+)
 
-/*
-<Drink
-  id={0}
-  name="Romano"
-  ordered={false}
-  image="http://localhost:4000/assets/cups/romano.png"
-  layers={[
-    {
-      color: '#fbdf5b',
-      label: 'citrón',
-    },
-    {
-      color: '#613916',
-      label: 'espresso',
-    },
-  ]}
-/>
- */
+//  {ordered ? 'Zrušit' : 'Objednat'} tady bych nechala Objednat a Zrušit na buttonu jako text kontent
+
+
 

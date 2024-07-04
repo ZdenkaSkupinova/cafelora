@@ -7,8 +7,7 @@ import { Menu } from '../Components/Menu/Menu';
 import { Gallery } from '../Components/Gallery/Gallery';
 import { Contact } from '../Components/Contact/Contact';
 import { Footer } from '../Components/Footer/Footer';
-
-
+import { drinks } from '../Components/Menu/Menu';
 
 document.querySelector('#root').innerHTML = render(
   <div className="page">
@@ -25,11 +24,17 @@ document.querySelector('#root').innerHTML = render(
 
 
 const navButton = document.querySelector('.nav-btn');
-const navMenu = document.querySelector('.rollout-nav');
+const navMenu = document.querySelector('.nav-closed');
 
 navButton.addEventListener('click', () => {
-  navMenu.classList.toggle('nav-closed');
-});
+  if (navMenu.classList.contains('nav-closed')) {
+      navMenu.classList.remove('nav-closed')
+      navMenu.classList.add('rollout-nav')
+  }else{
+      navMenu.classList.remove('rollout-nav')
+      navMenu.classList.add('nav-closed');
+  }
+})
 
 const navLinks = document.querySelectorAll('.rollout-nav a');
 navLinks.forEach(link => {
@@ -39,3 +44,35 @@ navLinks.forEach(link => {
 });
 
 
+const formsElm = document.querySelectorAll('.drink__controls');
+formsElm.forEach((form) => {
+  form.addEventListener('submit', async (e) => {
+   
+    const drinkId = Number(e.target.dataset.id)
+    console.log(`${drinkId}`);
+    
+    const drink = drinks.find((drink) => drink.id === drinkId) 
+    const newOrderedState = !drink.ordered
+   
+
+    await fetch(`http://localhost:4000/api/drinks/${drinkId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(
+        [
+          {  
+            op: 'replace',
+            path: '/ordered', 
+            value: newOrderedState
+          }
+        ]   
+      )
+    } 
+  ) 
+  window.location.reload()
+  }); 
+});
+
+// tohle nefunguje, 

@@ -9,13 +9,8 @@ import { Order } from '../Components/Order/Order';
 document.querySelector('#root').innerHTML = render(
   <div className="page">
     <div className="page">
-      <Header />
-        <main className="order">
-          <div className="container order__content">
-            <h1>Vaše objedávnka</h1>
-            <Order />  
-          </div>
-        </main>     
+      <Header showMenu={false}/>
+      <Order />  
       <Footer />
     </div>
   </div>

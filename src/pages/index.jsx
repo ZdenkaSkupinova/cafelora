@@ -11,7 +11,7 @@ import { drinks } from '../Components/Menu/Menu';
 
 document.querySelector('#root').innerHTML = render(
   <div className="page">
-    <Header />
+    <Header showMenu={true} />
     <main>
       <Banner />
       <Menu />
@@ -43,17 +43,15 @@ navLinks.forEach(link => {
   });
 });
 
-
 const formsElm = document.querySelectorAll('.drink__controls');
 formsElm.forEach((form) => {
   form.addEventListener('submit', async (e) => {
+    e.preventDefault()
    
     const drinkId = Number(e.target.dataset.id)
-    console.log(`${drinkId}`);
-    
     const drink = drinks.find((drink) => drink.id === drinkId) 
     const newOrderedState = !drink.ordered
-   
+    console.log(drinkId);
 
     await fetch(`http://localhost:4000/api/drinks/${drinkId}`, {
       method: "PATCH",
@@ -75,4 +73,4 @@ formsElm.forEach((form) => {
   }); 
 });
 
-// tohle nefunguje, 
+// nefunguje vypsání ID do console, jen při prokliknutí blikne číslo

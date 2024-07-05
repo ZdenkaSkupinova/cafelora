@@ -27,7 +27,7 @@ export const Drink = ({id, name, image, layers, ordered}) => (
 </div>
 )
 
-//  {ordered ? 'Zrušit' : 'Objednat'} tady bych nechala Objednat a Zrušit na buttonu jako text kontent
+
 
 
 

@@ -20,8 +20,8 @@ export const Menu = () => {
         <Drink  
             key={drink.id}
             id={drink.id}
-            name={drink.name}
             image={drink.image}
+            name={drink.name}
             layers={drink.layers}
             ordered={drink.ordered}
         />

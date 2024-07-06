@@ -22,3 +22,5 @@ export const Header = ({showMenu}) => (
     </div>
   </header>
 )
+
+//false = při @media mobile se objeví hamburger a nedá se vrátit na hlavní stránku

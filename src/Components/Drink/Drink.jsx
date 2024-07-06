@@ -5,7 +5,7 @@ export const Drink = ({id, name, image, layers, ordered}) => (
 <div className="drink">
 <div className="drink__product">
   <div className="drink__cup">
-  <img src={`http://localhost:4000${image}`} alt="šálek kávy"/>
+  <img src={`http://localhost:4000${image}`} alt={name}/>
   </div>
   <div className="drink__info">
     <h3>{name}</h3>
